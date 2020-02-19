@@ -1,0 +1,26 @@
+{
+  "bindings": [
+    {
+      "name": "items",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "items",
+      "connection": "storage-queue"
+    },
+    {
+      "name": "output1",
+      "type": "cosmosDB",
+      "direction": "out",
+      "connectionStringSetting": "cosmos-connection",
+      "databaseName": "shopping",
+      "collectionName": "items"  
+    },
+    {
+      "name": "output2",
+      "type": "queue",
+      "direction": "out",
+      "queueName": "processed-items",
+      "connection": "storage-queue"      
+    }
+  ]
+}
