@@ -2,5 +2,6 @@
     "azureFunctions.deploySubpath": ".",
     "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~3",
-    "debug.internalConsoleOptions": "neverOpen"
+    "debug.internalConsoleOptions": "neverOpen",
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

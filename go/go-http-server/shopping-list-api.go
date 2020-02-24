@@ -18,20 +18,20 @@ func add(w http.ResponseWriter, r *http.Request) {
 	// where are we called from?
 	invocationid := r.Header.Get("X-Azure-Functions-InvocationId")
 	if invocationid != "" {
-		fmt.Println("Called from Azure Function")
+		fmt.Println("GO: Called from Azure Function")
 	}
 
 	// get the json and unmarshall to a struct
 	b, _ := ioutil.ReadAll(r.Body)
 	var item ShoppingItem
 	json.Unmarshal(b, &item)
-	fmt.Println(fmt.Sprintf("Adding item: %v", item))
+	fmt.Println(fmt.Sprintf("GO: Adding item: %v", item))
 
 	// add to repo
 	shoppingList.Add(item)
 
 	// respond
-	w.Write([]byte("Hello World from go worker!"))
+	w.Write([]byte("GO: Item saved"))
 }
 
 func get(w http.ResponseWriter, r *http.Request) {
@@ -47,12 +47,12 @@ func get(w http.ResponseWriter, r *http.Request) {
 
 	if id > 0 {
 		item := shoppingList.Get(id)
-		fmt.Println(fmt.Sprintf("Returning item: %v", item))
+		fmt.Println(fmt.Sprintf("GO: Returning item: %v", item))
 		js, _ := json.Marshal(item)
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(js)
 	} else {
-		http.Error(w, "No item found", http.StatusNotFound)
+		http.Error(w, "GO: No item found", http.StatusNotFound)
 	}
 }
 
@@ -60,7 +60,7 @@ func list(w http.ResponseWriter, r *http.Request) {
 
 	items := shoppingList.List()
 	js, _ := json.Marshal(items)
-	fmt.Println(fmt.Sprintf("Returning items: %v", items))
+	fmt.Println(fmt.Sprintf("GO: Returning items: %v", items))
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
@@ -72,7 +72,7 @@ func sendItems(w http.ResponseWriter, r *http.Request) {
 	outputs := make(map[string]interface{})
 	outputs["output1"] = items
 
-	invokeResponse := InvokeResponse{outputs, []string{"Sent items - somewhere!"}, http.StatusCreated}
+	invokeResponse := InvokeResponse{outputs, []string{"GO: Sent items - somewhere!"}, http.StatusCreated}
 
 	js, _ := json.Marshal(invokeResponse)
 	w.Header().Set("Content-Type", "application/json")
@@ -92,7 +92,7 @@ func processItems(w http.ResponseWriter, r *http.Request) {
 	outputs := make(map[string]interface{})
 	outputs["output1"] = invokeReq.Data
 	outputs["output2"] = invokeReq.Data
-	invokeResponse := InvokeResponse{outputs, []string{"Processed + sent items"}, http.StatusCreated}
+	invokeResponse := InvokeResponse{outputs, []string{"GO: Processed + sent items"}, http.StatusCreated}
 
 	js, _ := json.Marshal(invokeResponse)
 	w.Header().Set("Content-Type", "application/json")
@@ -116,6 +116,6 @@ func main() {
 	mux.HandleFunc("/send-items", sendItems)
 	mux.HandleFunc("/process-items", processItems)
 
-	log.Println("Go server Listening...on httpInvokerPort:", httpInvokerPort)
+	log.Println("Go server Listening...on port:", httpInvokerPort)
 	log.Fatal(http.ListenAndServe(":"+httpInvokerPort, mux))
 }

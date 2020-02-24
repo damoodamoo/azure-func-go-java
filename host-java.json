@@ -1,0 +1,14 @@
+{
+    "version": "2.0",
+    "httpWorker": {
+		"description": {
+            "arguments": ["-jar"],
+            "defaultExecutablePath": "/usr/lib/jvm/java-8-openjdk-amd64/bin/java",      
+            "defaultWorkerPath": "com.damoo/target/com.damoo-1.0.jar"      
+		}
+	},
+	"extensionBundle": {
+        "id": "Microsoft.Azure.Functions.ExtensionBundle",
+        "version": "[1.*, 2.0.0)"
+    }
+}

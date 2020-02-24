@@ -2,11 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Debug (Launch)",
+      "request": "launch",
+      "mainClass": "",
+      "env": {
+        "FUNCTIONS_HTTPWORKER_PORT": 5000
+      }
+    },
+    /*,
+    {
       "name": "Attach to Process",
       "type": "go",
       "request": "attach",
       "mode": "local",
-      "processId": 1024
+      "processId": 1021
     }
     /*,
     {
