@@ -3,7 +3,7 @@
     "httpWorker": {
 		"description": {
             "arguments": ["-jar"],
-            "defaultExecutablePath": "/usr/lib/jvm/java-8-openjdk-amd64/bin/java",      
+            "defaultExecutablePath": "java",      
             "defaultWorkerPath": "com.damoo/target/com.damoo-1.0.jar"      
 		}
 	},

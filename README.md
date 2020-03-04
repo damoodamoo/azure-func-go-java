@@ -1,4 +1,4 @@
-# Azure Functions with Go
+# Azure Functions with Go / Java Spring
 This repo contains some sample code experimenting with the new http worker coming in Azure Functions. More details and samples for this feature can be found at [Pragna Gopa's](https://github.com/pragnagopa/) repo [here](https://github.com/pragnagopa/functions-http-worker/).
 
 ## Structure
@@ -45,6 +45,22 @@ func start
 - `/api/list`: `GET` all items
 - `/api/send-items`: `GET`. Send all items to a storage queue
 - `process-items` (non-http): Trigger on queue and post to cosmos and secondary queue
+
+## Use the container
+It's also possible - and in this case probably desirable - to containerise your functions. This can help smooth the deployment too. The Dockerfile found in this repo uses the standard node image for functions, and installs Java 11 into it. 
+
+**Build:**
+```bash
+docker build -t myregistry.azurecr.io/javafunc:1 .
+```
+**Push:**
+```bash
+docker push myregistry.azurecr.io/javafunc:1
+```
+
+**Wire up:**
+
+Create a new function app and select `Container` as the runtime - follow the wizard to point it to your pushed container in your registry. More found [here](https://docs.microsoft.com/en-us/azure/devops/pipelines/targets/function-app-container?view=azure-devops&tabs=yaml).
 
 
 ## Disclaimer

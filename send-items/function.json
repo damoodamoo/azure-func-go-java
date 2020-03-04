@@ -19,7 +19,7 @@
       "type": "queue",
       "direction": "out",
       "queueName": "items",
-      "connection": "storage-queue"      
+      "connection": "storageQueue"      
     }
   ]
 }
